@@ -1,0 +1,39 @@
+name: studio
+services:
+  main:
+    # Change this to pin to a specific version
+    image: vertigisapps.azurecr.io/studio/base:v1.1.609.227092-r13687690123
+    ports:
+      # Map port 80 to 8080 of the container
+      - 80:8080
+      # Map port 443 to 8443 of the container
+      - 443:8443
+    environment:
+      # Create an application in ArcGIS Portal
+      # Find this value in the OAUTH2 registration
+      ARCGIS_APP_ID: app_id
+      # Portal URL
+      # This must be the base URL of your portal      
+      ARCGIS_PORTAL_URL: https://server.contoso.com/portal      
+      # VertiGIS account identifier
+      VERTIGIS_ACCOUNT_ID: account_id
+      # This instance will purge old data
+      VERTIGIS_PURGE: 1
+      # This instance will handle 8 parallel jobs
+      VERTIGIS_WORKERS: 8
+      # Frontend URL
+      # This instance will be found here
+      FRONTEND_URL: https://server/path
+      # This instance should look for a web certificate host_id.pfx
+      WEB_CERT: host
+    volumes:
+      - "data:/data"
+      - "logs:/var/log"
+      - "stmp:/stmp"
+      - "./server:/etc/nginx/server"
+      - "./ca-certs:/usr/local/share/ca-certificates"
+      - "./web-certs:/usr/local/share/web-certificates"
+volumes:
+  data: {}
+  logs: {}
+  stmp: {}
