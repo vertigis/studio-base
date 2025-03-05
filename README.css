@@ -1,0 +1,207 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Non-code font */
+  font-size: 16px;
+  line-height: 1.6;
+  color: #d4d4d4;
+  background-color: #1e1e1e;
+  padding: 20px;
+  margin: 20px; /* Normal page margins */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+  color: #569cd6;
+  border-bottom: 1px solid #3c3c3c;
+  padding-bottom: 0.3em;
+}
+
+/* Paragraphs */
+p {
+  margin-bottom: 1.2em;
+  text-align: justify;
+}
+
+p code {
+  white-space: nowrap;
+}
+
+/* Links */
+a {
+  color: #3794ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Lists */
+ul, ol {
+  padding-left: 20px;
+}
+
+ul li {
+  list-style-type: disc;
+}
+
+ol li {
+  list-style-type: decimal;
+}
+
+/* Tightened Code blocks */
+pre {
+  position: relative;
+  background-color: #2e3440; /* Custom "other" color */
+  color: #eceff4;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 1.2em;
+  border: 1px solid #4c566a;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Courier New', monospace; /* Monospaced font */
+  padding-top: 58px;
+}
+
+code {
+  background-color: #2e3440;
+  color: #88c0d0;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Consolas', 'Courier New', monospace; /* Monospaced font */
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+pre::before {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #4c566a;
+  padding: 10px;
+}
+
+pre.inf::before {
+  content: "host.inf"
+}
+
+pre.bash::before {
+  content: "BASH";
+}
+
+pre.script::before {
+  content: "SCRIPT";
+}
+
+pre.powershell::before {
+  content: "POWERSHELL";
+}
+
+pre.cmd::before {
+  content: "CMD";
+}
+
+pre.git::before {
+  content: "GIT";
+}
+
+/* Code comments */
+span.co {
+  color: #6a9955; /* Nice green color for comments */
+}
+
+/* Blockquotes */
+blockquote {
+  margin: 1.5em 0;
+  padding: 10px 20px;
+  background-color: #252526;
+  border-left: 5px solid #007acc;
+  color: #d4d4d4;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5em;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #333;
+  white-space: nowrap;
+}
+
+th {
+  background-color: #252526;
+  color: #d4d4d4;
+  text-align: left;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Horizontal rule */
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #333;
+  margin: 2em 0;
+}
+
+/* Inline elements like strong, em, and inline code */
+strong {
+  color: #569cd6;
+}
+
+em {
+  color: #ce9178;
+}
+
+code {
+  color: #c586c0;
+}
+
+p.date {
+  font-style: italic;
+  font-size: small;
+  color: #777;
+}
+
+/* Responsive typography */
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.75em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+}
+
