@@ -1,0 +1,37 @@
+; Find this value from certutil
+; Config: default
+
+[Version]
+Signature="$Windows NT$"
+
+; Change the subject
+[NewRequest]
+Subject = "CN=web-cert-for-sample"
+KeySpec = 1
+KeyLength = 4096
+Exportable = TRUE
+MachineKeySet = TRUE
+SMIME = FALSE
+PrivateKeyArchive = FALSE
+UserProtected = FALSE
+UseExistingKeySet = FALSE
+ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
+ProviderType = 12
+RequestType = PKCS10
+KeyUsage = 0xa0
+Silent = TRUE
+
+; Use the WebServer template, version 3
+[RequestAttributes]
+CertificateTemplate = WebServerV3
+
+; Specify Subject Alternative Names (SANs)
+; Change this for your needs
+[Extensions]
+2.5.29.17 = "{text}"
+_continue_ = "dns=server1.contoso.com&"
+_continue_ = "dns=server2.contoso.com"
+
+[EnhancedKeyUsageExtension]
+OID=1.3.6.1.5.5.7.3.1 ; Server Authentication
+OID=1.3.6.1.5.5.7.3.2 ; Client Authentication
