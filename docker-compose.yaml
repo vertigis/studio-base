@@ -1,0 +1,45 @@
+name: vs-studio
+services:
+  main:
+    # Change this to pin to a specific version
+    image: ghcr.io/vertigis/studio/base:v1.1.677.241594-r14982707196
+    ports:
+      # Map port 8080 to 8080 of the container
+      # This port is usually used for reverse proxying to the container.
+      - 8080:8080
+      # Map port 443 to 8443 of the container
+      # This port is usually used for direct communication via TLS/SSL.
+      - 443:8443
+    environment:
+      # Create an application in ArcGIS Portal
+      # Find this value in the OAUTH2 registration
+      ARCGIS_APP_ID: app_id
+      # Portal URL
+      # This must be the base URL of your portal      
+      ARCGIS_PORTAL_URL: https://portal.contoso.com/portal
+      # VertiGIS account identifier
+      VERTIGIS_ACCOUNT_ID: account_id
+      # This instance will purge old data
+      VERTIGIS_PURGE: 1
+      # This instance will handle 8 parallel jobs
+      VERTIGIS_WORKERS: 8
+      # Frontend URL
+      # This instance will be found here
+      FRONTEND_URL: https://server.contoso.com/path
+      # Specify web certificate path
+      # This is the subfolder of certs-web you wish to use
+      # If using certbot, use something like certbot/domain.contoso.net
+      WEB_CERT: host
+    volumes:
+      - "data:/data"
+      - "logs:/var/log"
+      - "stmp:/stmp"
+      - "./certs-ca:/usr/local/share/ca-certificates"
+      - "./certs-web:/usr/local/share/web-certificates"
+      - "./nginx-server:/etc/nginx/server"
+      - "/etc/letsencrypt/archive:/usr/local/share/web-certificates/certbot"
+
+volumes:
+  data: {}
+  logs: {}
+  stmp: {}

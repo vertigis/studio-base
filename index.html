@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="README.css" />
+    <title>Studio Base - Installation</title>
+</head>
+<body>
+    <h1>Studio Base - Installation</h1>
+    <p class="date">
+        Updated on: Mon May 12 14:11:36 PDT 2025
+    </p>
+    <nav>
+        <ul>
+        <li><a href="#links" id="toc-links">Links</a></li>
+        <li><a href="#reference-guides"
+        id="toc-reference-guides">Reference Guides</a></li>
+        <li><a href="#system-requirements"
+        id="toc-system-requirements">System Requirements</a></li>
+        <li><a href="#preparation" id="toc-preparation">Preparation</a>
+        <ul>
+        <li><a href="#account-id-and-registry-credentials"
+        id="toc-account-id-and-registry-credentials">Account ID and
+        Registry Credentials</a></li>
+        <li><a href="#linux-machine" id="toc-linux-machine">Linux
+        Machine</a></li>
+        <li><a href="#front-end-url" id="toc-front-end-url">Front-End
+        URL</a></li>
+        <li><a href="#arcgis-portal-and-application-registration"
+        id="toc-arcgis-portal-and-application-registration">ArcGIS
+        Portal and Application Registration</a></li>
+        <li><a href="#get-the-package" id="toc-get-the-package">Get the
+        Package</a></li>
+        </ul></li>
+        <li><a href="#deployment-overview"
+        id="toc-deployment-overview">Deployment Overview</a></li>
+        <li><a href="#on-linux-initial-setup"
+        id="toc-on-linux-initial-setup">On Linux: Initial Setup</a></li>
+        <li><a href="#on-linux-upgrade-to-latest"
+        id="toc-on-linux-upgrade-to-latest">On Linux: Upgrade to
+        Latest</a></li>
+        <li><a href="#on-windows-remotely-administer-your-linux-machine"
+        id="toc-on-windows-remotely-administer-your-linux-machine">On
+        Windows: Remotely Administer your Linux Machine</a>
+        <ul>
+        <li><a href="#install-tools-administrator-session"
+        id="toc-install-tools-administrator-session">Install Tools
+        (Administrator Session)</a></li>
+        <li><a
+        href="#install-tools-cli-alternative-administrator-session"
+        id="toc-install-tools-cli-alternative-administrator-session">Install
+        Tools CLI Alternative (Administrator Session)</a></li>
+        <li><a href="#initial-deployment"
+        id="toc-initial-deployment">Initial Deployment</a></li>
+        <li><a href="#update-the-deployment"
+        id="toc-update-the-deployment">Update the Deployment</a></li>
+        <li><a href="#continue-setup-on-linux"
+        id="toc-continue-setup-on-linux">Continue Setup on
+        Linux</a></li>
+        </ul></li>
+        <li><a href="#port-management" id="toc-port-management">Port
+        Management</a>
+        <ul>
+        <li><a href="#bring-you-own-reverse-proxy"
+        id="toc-bring-you-own-reverse-proxy">Bring you own Reverse
+        Proxy</a></li>
+        <li><a href="#leverage-the-https-feature"
+        id="toc-leverage-the-https-feature">Leverage the HTTPS
+        Feature</a></li>
+        </ul></li>
+        <li><a href="#give-the-container-a-real-web-certificate"
+        id="toc-give-the-container-a-real-web-certificate">Give the
+        Container a Real Web Certificate</a>
+        <ul>
+        <li><a
+        href="#use-acme-via-certbot-from-lets-encrypt-recommended"
+        id="toc-use-acme-via-certbot-from-lets-encrypt-recommended">Use
+        ACME via <code>certbot</code> from Let’s Encrypt
+        (RECOMMENDED)</a></li>
+        <li><a href="#use-a-given-.pfx-file"
+        id="toc-use-a-given-.pfx-file">Use a given <code>.pfx</code>
+        file</a></li>
+        </ul></li>
+        <li><a href="#using-studio-as-a-reverse-proxy"
+        id="toc-using-studio-as-a-reverse-proxy">Using Studio as a
+        Reverse Proxy</a></li>
+        </ul>
+    </nav>
+    <h2 id="links">Links</h2>
+    <ul>
+    <li><a
+    href="https://github.com/vertigis/studio-base/releases/v1.1.677.241594-r14982707196">This
+    Release</a> ( v1.1.677.241594-r14982707196 )
+    <ul>
+    <li><a
+    href="https://github.com/vertigis/studio-base/pkgs/container/studio%2fbase/413952295?tag=v1.1.677.241594-r14982707196">Image</a></li>
+    <li><a href="https://github.com/">Installation Guide</a></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base-internal/archive/refs/tags/v0-pr-13249732233.zip">Deployment
+    Package (ZIP)</a></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base-internal/archive/refs/tags/v0-pr-13249732233.tar.gz">Deployment
+    Package (TGZ)</a></li>
+    </ul></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base/releases">Releases</a></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base/pkgs/container/studio%2fbase">Images</a></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base">Repository</a></li>
+    <li><a href="https://vertigis.github.io/studio-base/">Site</a></li>
+    </ul>
+    <h2 id="reference-guides">Reference Guides</h2>
+    <ul>
+    <li><a href="https://docs.docker.com/get-started/">Docker
+    Tutorial</a></li>
+    <li><a href="https://docs.docker.com/compose/gettingstarted/">Docker
+    Compose Tutorial</a></li>
+    <li><a href="https://www.ssh.com/academy/ssh">SSH Tutorial</a></li>
+    <li><a
+    href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_overview">SSH
+    Tutorial</a> – Microsoft Learn</li>
+    <li><a href="https://code.visualstudio.com/docs/remote/ssh">SSH and
+    VS Code</a></li>
+    </ul>
+    <h2 id="system-requirements">System Requirements</h2>
+    <table>
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 85%" />
+    </colgroup>
+    <thead>
+    <tr class="header">
+    <th>Requirement</th>
+    <th>Spec</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>OS</td>
+    <td>Linux</td>
+    </tr>
+    <tr class="even">
+    <td>Distribution</td>
+    <td>Ubuntu 24.04, Ubuntu 22.04, or Debian 12 (bookworm)</td>
+    </tr>
+    <tr class="odd">
+    <td>Memory</td>
+    <td>4 GB Minimum, 8 GB Preferred</td>
+    </tr>
+    <tr class="even">
+    <td>Disk</td>
+    <td>16 GB Free</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="preparation">Preparation</h2>
+    <p>In order to run VertiGIS Studio in containers, there are a few
+    prerequisites that should be satisfied. Before you begin, please
+    have the following at hand:</p>
+    <h3 id="account-id-and-registry-credentials">Account ID and Registry
+    Credentials</h3>
+    <p>We require an appropriate license to run our software, but also,
+    you will need registry credentials to pull down the software. Our
+    support can help you with finding the following information:</p>
+    <ul>
+    <li>VertiGIS Account ID</li>
+    <li>GitHub
+    <ul>
+    <li>Account</li>
+    <li>Permissions to ghcr.io/vertigis/studio/base</li>
+    </ul></li>
+    </ul>
+    <h3 id="linux-machine">Linux Machine</h3>
+    <p>We require Linux to run VertiGIS Studio in containers. You will
+    need to have a suitable distribution/version of Linux installed on
+    an appropriately resourced machine. Please review the system
+    requirements. We suggest using said Linux machine as a pure Docker
+    host. In other words, do not install software directly on the host
+    system.</p>
+    <h3 id="front-end-url">Front-End URL</h3>
+    <p>As with all web software, you will need to know the front-end URL
+    of where you plan to host the software. Various components need to
+    know this value.</p>
+    <h3 id="arcgis-portal-and-application-registration">ArcGIS Portal
+    and Application Registration</h3>
+    <p>Go to your portal and create a web application:</p>
+    <ul>
+    <li>Register this application (enable OAUTH2)</li>
+    <li>Provide a Redirect URL (use the Front-End URL)</li>
+    <li>Note the App ID</li>
+    </ul>
+    <h3 id="get-the-package">Get the Package</h3>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using bash on Debian/Ubuntu</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> mkdir <span class="ex">-p</span> deploy-studio</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cd <span class="ex">deploy-studio</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> curl <span class="ex">-fsSL</span> https://github.com/vertigis/studio-base/archive/refs/tags/v1.1.677.241594-r14982707196.tar.gz <span class="kw">|</span> <span class="fu">tar</span> <span class="at">-xz</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Using cmd on Windows</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> mkdir <span class="ex">deploy-studio</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cd <span class="ex">deploy-studio</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> curl <span class="ex">-fsSL</span> https://github.com/vertigis/studio-base/archive/refs/tags/v1.1.677.241594-r14982707196.tar.gz <span class="at">-o</span> deploy.tgz</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> tar <span class="ex">-xzf</span> deploy.tgz</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> del <span class="ex">deploy.tgz</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Using powershell on Windows</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> mkdir <span class="ex">deploy-studio</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cd <span class="ex">deploy-studio</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> iwr <span class="ex">-Uri</span> https://github.com/vertigis/studio-base/archive/refs/tags/v1.1.677.241594-r14982707196.zip <span class="at">-OutFile</span> deploy.zip</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> Expand-Archive <span class="ex">-Path</span> deploy.zip <span class="at">-DestinationPath</span> .</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> del <span class="ex">deploy.zip</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Using git</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> git <span class="ex">clone</span> <span class="at">--depth</span> 1 <span class="at">--branch</span> v1.1.677.241594-r14982707196 https://github.com/vertigis/studio-base deploy-studio</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cd <span class="ex">deploy-studio</span></span></code></pre></div>
+    <h2 id="deployment-overview">Deployment Overview</h2>
+    <p>The primary part of the installation will happen on the Linux
+    machine you have provisioned for this task. If your on a Windows
+    Enterprise network, you may want to capture the Enterprise CA
+    certificates. This step can only really be done effectively from a
+    domain-joined Windows machine.</p>
+    <h2 id="on-linux-initial-setup">On Linux: Initial Setup</h2>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Docker and supporting tools if needed</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> sudo <span class="ex">./install-tools.sh</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> exec <span class="fu">sudo</span> su <span class="at">-</span> <span class="va">$USER</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit configuration for VertiGIS Studio</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># If using a plain terminal, try one of these:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> nano <span class="ex">docker-compose.yaml</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> vi <span class="ex">docker-compose.yaml</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># If using a GUI, try one of these:</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> code <span class="ex">docker-compose.yaml</span> <span class="kw">&amp;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gedit <span class="ex">docker-compose.yaml</span> <span class="kw">&amp;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> kate <span class="ex">docker-compose.yaml</span> <span class="kw">&amp;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> mousepad <span class="ex">docker-compose.yaml</span> <span class="kw">&amp;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Gain access to images</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gh <span class="ex">auth</span> login <span class="at">-w</span> <span class="at">-s</span> repo,read:packages</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gh <span class="ex">auth</span> token <span class="kw">|</span> <span class="ex">docker</span> login ghcr.io <span class="at">-u</span> x-access-token <span class="at">--password-stdin</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull/Start VertiGIS Studio</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="ex">compose</span> up <span class="at">--wait</span></span></code></pre></div>
+    <h2 id="on-linux-upgrade-to-latest">On Linux: Upgrade to Latest</h2>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If login has expired, gain access to images</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gh <span class="ex">auth</span> login <span class="at">-w</span> <span class="at">-s</span> repo,read:packages</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gh <span class="ex">auth</span> token <span class="kw">|</span> <span class="ex">docker</span> login ghcr.io <span class="at">-u</span> x-access-token <span class="at">--password-stdin</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull down VertiGIS Studio</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="ex">compose</span> pull</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Upgrade VertiGIS Studio</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="ex">compose</span> up <span class="at">--wait</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Refresh configuration </span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="bu">exec</span> vs-studio-main-1 util-refresh</span></code></pre></div>
+    <h2 id="on-windows-remotely-administer-your-linux-machine">On
+    Windows: Remotely Administer your Linux Machine</h2>
+    <p>On Windows, we suggest using a full-featured SSH client like VS
+    Code to perform administrative tasks on a remote Linux machine. VS
+    Code supports remote file editing as well as remote command
+    execution.</p>
+    <h3 id="install-tools-administrator-session">Install Tools
+    (Administrator Session)</h3>
+    <ul>
+    <li>Goto Windows Optional Features -&gt; Add an Optional Feature:
+    <ul>
+    <li>Install RSAT: Active Directory Domain Services</li>
+    <li>Install OpenSSH Client</li>
+    </ul></li>
+    <li>Optionally, download and install the following:
+    <ul>
+    <li><a href="https://code.visualstudio.com/download">VS
+    Code</a></li>
+    </ul></li>
+    </ul>
+    <h3 id="install-tools-cli-alternative-administrator-session">Install
+    Tools CLI Alternative (Administrator Session)</h3>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If not already done, install supporting tools</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Get<span class="op">-</span>WindowsCapability <span class="op">-</span>Online <span class="op">-</span>Name RSAT<span class="op">.</span><span class="fu">ActiveDirectory</span><span class="op">.*</span> <span class="op">|</span> Add<span class="op">-</span>WindowsCapability <span class="op">-</span>Online</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Add<span class="op">-</span>WindowsCapability <span class="op">-</span>Online <span class="op">-</span>Name OpenSSH<span class="op">.</span><span class="fu">Client</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># If desired,  install vscode</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>winget install vscode</span></code></pre></div>
+    <h3 id="initial-deployment">Initial Deployment</h3>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract CA certificates from Active Directory</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Some environments may use an internal CA system.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># This will enable systems to communicate over HTTPS in this situation.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="op">.</span>\extract<span class="op">-</span>ca<span class="op">-</span>certs<span class="op">.</span><span class="fu">ps1</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit configuration for VertiGIS Studio:</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> code docker<span class="op">-</span>compose<span class="op">.</span><span class="fu">yaml</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> notepad docker<span class="op">-</span>compose<span class="op">.</span><span class="fu">yaml</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># If not already done, create SSH key (we suggest using the defaults):</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ssh<span class="op">-</span>keygen <span class="op">-</span>t ed25519</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># For convenience, set the target system:</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="va">$server</span> <span class="op">=</span> <span class="st">&quot;user@my-linux-server.contoso.net&quot;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co"># If not already done, register yourself for passwordless login:</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="op">(</span><span class="fu">gc</span> <span class="va">$env</span><span class="op">:</span>USERPROFILE\<span class="op">.</span><span class="fu">ssh</span>\id_ed25519<span class="op">.</span><span class="fu">pub</span> <span class="op">-</span>Raw<span class="op">)</span> <span class="op">|</span> ssh <span class="va">$server</span> <span class="st">&#39;cat &gt;&gt; ~/.ssh/authorized_keys&#39;</span></span></code></pre></div>
+    <h3 id="update-the-deployment">Update the Deployment</h3>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For convenience, set the target system:</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="va">$server</span> <span class="op">=</span> <span class="st">&quot;user@my-linux-server.contoso.net&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Transfer context and SSH:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> scp <span class="op">-</span>r <span class="op">.</span> <span class="st">&quot;$server`:deploy-studio&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ssh <span class="va">$server</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="fu">cd</span> deploy<span class="op">-</span>studio</span></code></pre></div>
+    <h3 id="continue-setup-on-linux">Continue Setup on Linux</h3>
+    <ul>
+    <li><a href="#on-linux-initial-setup">Initial Setup</a></li>
+    <li><a href="#on-linux-upgrade-to-latest">Upgrade to Latest</a></li>
+    </ul>
+    <h2 id="port-management">Port Management</h2>
+    <p>The Studio image will provide HTTP access (container port 8080)
+    and HTTPS access (container port 8443). You may map these ports
+    however you like on the host machine (see configuration).</p>
+    <h3 id="bring-you-own-reverse-proxy">Bring you own Reverse
+    Proxy</h3>
+    <p>If you wish to use your own reverse proxy, you will want to
+    expose the container via non-standard ports. Afterwards, you will
+    need to configure your reverse proxy to route to one of these ports.
+    Remember to give the container a certificate if you plan to route to
+    the HTTPS port.</p>
+    <h3 id="leverage-the-https-feature">Leverage the HTTPS Feature</h3>
+    <p>If you wish, you may leverage the HTTPS port directly and route
+    the standard HTTPS port (443) to the container port (8443).</p>
+    <h2 id="give-the-container-a-real-web-certificate">Give the
+    Container a Real Web Certificate</h2>
+    <p>The container is setup to use SSL certificates if provided. You
+    have a few options for certificate issuance:</p>
+    <h3 id="use-acme-via-certbot-from-lets-encrypt-recommended">Use ACME
+    via <code>certbot</code> from Let’s Encrypt (RECOMMENDED)</h3>
+    <p>The most straightforward option for requesting an SSL certificate
+    on Linux is to use ACME. <code>certbot</code> lets you easily manage
+    this exchange via some simple prompts:</p>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Configure certbot for your domain</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: You only need to do this once per domain of interest.</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: You must have port 80 open.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: You will be prompted to answer some questions.</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: Windows Enterprise environments can enable ACME, ask your Enterprise Admin.</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># If using a public domain:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> sudo <span class="ex">certbot</span> certonly <span class="at">--standalone</span> <span class="at">-d</span> my-server.contoso.com</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># If using a non-public domain or custom ACME server:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> sudo <span class="ex">certbot</span> certonly <span class="at">--standalone</span> <span class="at">-d</span> my-server.contoso.com <span class="at">--server</span> <span class="op">&lt;</span>url<span class="op">&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># You may run certbot to renew your SSL certificate at any time:</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> sudo <span class="ex">certbot</span> renew</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># If you wish to apply the cert immediately:</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="bu">exec</span> vs-studio-main-1 util-refresh</span></code></pre></div>
+    <h3 id="use-a-given-.pfx-file">Use a given <code>.pfx</code>
+    file</h3>
+    <div class="sourceCode" id="cb8"><pre
+    class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If on Windows, copy the .pfx file into the right place:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># For convenience, set the target system:</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> <span class="va">$server</span> <span class="op">=</span> <span class="st">&quot;user@my-linux-server.contoso.net&quot;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Transfer PFX:</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> scp <span class="op">-</span>r path\to\my<span class="op">.</span><span class="fu">pfx</span> <span class="st">&quot;$server`:deploy-studio/certs-web/host.pfx&quot;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># SSH into the server:</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ssh <span class="va">$server</span></span></code></pre></div>
+    <div class="sourceCode" id="cb9"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If not already done, copy the .pfx file into the right place:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> mkdir <span class="ex">-p</span> certs-web</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cp <span class="ex">path/to/my.pfx</span> certs-web<span class="dt">\h</span>ost.pfx</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert .pfx file into the right format:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> bash <span class="ex">./convert-pfx.sh</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># If you wish to apply the cert immediately:</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="bu">exec</span> vs-studio-main-1 util-refresh</span></code></pre></div>
+    <h2 id="using-studio-as-a-reverse-proxy">Using Studio as a Reverse
+    Proxy</h2>
+    <p>For convenience, the Studio image provides a means of using the
+    internal NGINX server as a reverse proxy. You can take advantage of
+    this for whatever needs you have:</p>
+    <ul>
+    <li>Modify <code>nginx-server/nginx.conf</code> file</li>
+    <li>Refresh your deployment (see <a
+    href="#on-linux-upgrade-to-latest">here</a>)</li>
+    </ul>
+</body>
+</html>
