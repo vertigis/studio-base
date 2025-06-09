@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="README.css" />
+    <title>Studio Base - Installation</title>
+</head>
+<body>
+    <h1>Studio Base - Installation</h1>
+    <p class="date">
+        Updated on: Mon Jun 9 15:14:18 PDT 2025
+    </p>
+    <nav>
+        <ul>
+        <li><a href="#links" id="toc-links">Links</a></li>
+        <li><a href="#reference-guides"
+        id="toc-reference-guides">Reference Guides</a></li>
+        <li><a href="#system-requirements"
+        id="toc-system-requirements">System Requirements</a></li>
+        <li><a href="#preparation" id="toc-preparation">Preparation</a>
+        <ul>
+        <li><a href="#account-id-and-registry-credentials"
+        id="toc-account-id-and-registry-credentials">Account ID and
+        Registry Credentials</a></li>
+        <li><a href="#linux-machine" id="toc-linux-machine">Linux
+        Machine</a></li>
+        <li><a href="#front-end-url" id="toc-front-end-url">Front-End
+        URL</a></li>
+        <li><a href="#arcgis-portal-and-application-registration"
+        id="toc-arcgis-portal-and-application-registration">ArcGIS
+        Portal and Application Registration</a></li>
+        </ul></li>
+        <li><a href="#deployment-overview"
+        id="toc-deployment-overview">Deployment Overview</a></li>
+        <li><a href="#on-windows-install-ssh-and-supporting-tools"
+        id="toc-on-windows-install-ssh-and-supporting-tools">On Windows:
+        Install SSH and Supporting Tools</a></li>
+        <li><a href="#on-remote-setting-up-ssh"
+        id="toc-on-remote-setting-up-ssh">On Remote: Setting up
+        SSH</a></li>
+        <li><a href="#on-remote-remote-in-via-ssh"
+        id="toc-on-remote-remote-in-via-ssh">On Remote: Remote in via
+        SSH</a></li>
+        <li><a href="#on-linux-host-get-the-package"
+        id="toc-on-linux-host-get-the-package">On Linux Host: Get the
+        Package</a></li>
+        <li><a href="#on-remote-activate-the-product"
+        id="toc-on-remote-activate-the-product">On Remote: Activate the
+        Product</a></li>
+        <li><a href="#on-linux-host-initial-setup"
+        id="toc-on-linux-host-initial-setup">On Linux Host: Initial
+        Setup</a></li>
+        <li><a href="#on-linux-host-updating"
+        id="toc-on-linux-host-updating">On Linux Host: Updating</a></li>
+        <li><a href="#check-list" id="toc-check-list">Check
+        List</a></li>
+        </ul>
+    </nav>
+    <h2 id="links">Links</h2>
+    <ul>
+    <li><a
+    href="https://github.com/vertigis/studio-base/releases/v1.1.677.241594-r15545747430">This
+    Release</a> ( v1.1.677.241594-r15545747430 )
+    <ul>
+    <li><a
+    href="https://github.com/vertigis/studio-base/pkgs/container/studio%2fbase/434314503?tag=v1.1.677.241594-r15545747430">Image</a></li>
+    <li><a href="https://github.com/">Installation Guide</a></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base-internal/archive/refs/tags/v0-pr-13249732233.zip">Deployment
+    Package (ZIP)</a></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base-internal/archive/refs/tags/v0-pr-13249732233.tar.gz">Deployment
+    Package (TGZ)</a></li>
+    </ul></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base/releases">Releases</a></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base/pkgs/container/studio%2fbase">Images</a></li>
+    <li><a
+    href="https://github.com/vertigis/studio-base">Repository</a></li>
+    <li><a href="https://vertigis.github.io/studio-base/">Site</a></li>
+    </ul>
+    <h2 id="reference-guides">Reference Guides</h2>
+    <ul>
+    <li><a href="https://docs.docker.com/get-started/">Docker — Getting
+    Started</a></li>
+    <li><a href="https://docs.docker.com/compose/gettingstarted/">Docker
+    Compose — Getting Started</a></li>
+    <li><a href="https://www.ssh.com/academy/ssh">SSH Tutorial</a></li>
+    <li><a
+    href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_overview">SSH
+    Tutorial — Microsoft Learn</a></li>
+    <li><a href="https://code.visualstudio.com/docs/remote/ssh">SSH and
+    VS Code</a></li>
+    </ul>
+    <h2 id="system-requirements">System Requirements</h2>
+    <table>
+    <colgroup>
+    <col style="width: 14%" />
+    <col style="width: 85%" />
+    </colgroup>
+    <thead>
+    <tr class="header">
+    <th>Requirement</th>
+    <th>Spec</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>OS</td>
+    <td>Linux</td>
+    </tr>
+    <tr class="even">
+    <td>Distribution</td>
+    <td>Ubuntu 24.04, Ubuntu 22.04, or Debian 12 (bookworm)</td>
+    </tr>
+    <tr class="odd">
+    <td>Memory</td>
+    <td>4 GB Minimum, 8 GB Preferred</td>
+    </tr>
+    <tr class="even">
+    <td>Disk</td>
+    <td>16 GB Free</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="preparation">Preparation</h2>
+    <p>In order to run VertiGIS Studio in containers, there are a few
+    prerequisites that should be satisfied. Before you begin, please
+    have the following at hand:</p>
+    <h3 id="account-id-and-registry-credentials">Account ID and Registry
+    Credentials</h3>
+    <p>We require an appropriate license to run our software, but also,
+    you will need registry credentials to pull down the software. Our
+    support can help you with finding the following information:</p>
+    <ul>
+    <li>VertiGIS Account ID</li>
+    <li>GitHub
+    <ul>
+    <li>Account</li>
+    <li>Permissions to ghcr.io/vertigis/studio/base</li>
+    </ul></li>
+    </ul>
+    <h3 id="linux-machine">Linux Machine</h3>
+    <p>We require Linux to run VertiGIS Studio in containers. You will
+    need to have a suitable distribution/version of Linux installed on
+    an appropriately resourced machine. Please review the system
+    requirements. We suggest using said Linux machine as a pure Docker
+    host. In other words, do not install software directly on the host
+    system.</p>
+    <h3 id="front-end-url">Front-End URL</h3>
+    <p>As with all web software, you will need to know the front-end URL
+    of where you plan to host the software. Various components need to
+    know this value.</p>
+    <h3 id="arcgis-portal-and-application-registration">ArcGIS Portal
+    and Application Registration</h3>
+    <p>Go to your portal and create a web application:</p>
+    <ul>
+    <li>Register this application (enable OAUTH2)</li>
+    <li>Provide a Redirect URL (use the Front-End URL)</li>
+    <li>Note the App ID</li>
+    </ul>
+    <h2 id="deployment-overview">Deployment Overview</h2>
+    <p>The primary part of the installation will happen on the Linux
+    machine you have provisioned for this task. You may still use
+    Windows as a means to remotely administer your Linux system.</p>
+    <p>The package includes an ingress proxy (Traefik) and demonstrates
+    how to use said ingress mechanism. If you are using Windows, we
+    suggest enabling ACME on your Enterprise CA as this will be the
+    easiest way to acquire an Web Server certificates through the
+    ingress proxy.</p>
+    <h2 id="on-windows-install-ssh-and-supporting-tools">On Windows:
+    Install SSH and Supporting Tools</h2>
+    <p>If using Windows to remotely administer your Linux environments,
+    you’ll need a variety of tools. We suggest using a full-featured SSH
+    client like VS Code to perform administrative tasks in this case. VS
+    Code supports remote file editing as well as remote command
+    execution.</p>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If not already done, install supporting tools</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> Get<span class="op">-</span>WindowsCapability <span class="op">-</span>Online <span class="op">-</span>Name RSAT<span class="op">.</span><span class="fu">ActiveDirectory</span><span class="op">.*</span> <span class="op">|</span> Add<span class="op">-</span>WindowsCapability <span class="op">-</span>Online</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> Add<span class="op">-</span>WindowsCapability <span class="op">-</span>Online <span class="op">-</span>Name OpenSSH<span class="op">.</span><span class="fu">Client</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># If desired, install vscode</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> winget install vscode</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> code <span class="op">--</span>install<span class="op">-</span>extension ms<span class="op">-</span>vscode<span class="op">-</span>remote<span class="op">.</span><span class="fu">remote</span><span class="op">-</span>ssh</span></code></pre></div>
+    <p>You can do this via the GUI as well:</p>
+    <ul>
+    <li>Goto Windows Optional Features -&gt; Add an Optional Feature:
+    <ul>
+    <li>Install RSAT: Active Directory Domain Services</li>
+    <li>Install OpenSSH Client</li>
+    </ul></li>
+    <li>Optionally, download and install the following:
+    <ul>
+    <li><a href="https://code.visualstudio.com/download">VS
+    Code</a></li>
+    <li>Install the Remote SSH Extension</li>
+    </ul></li>
+    </ul>
+    <h2 id="on-remote-setting-up-ssh">On Remote: Setting up SSH</h2>
+    <div class="sourceCode" id="cb2"><pre
+    class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create SSH key (we suggest using the defaults):</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: Only do this once or if you want to generate new key.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ssh-keygen <span class="ex">-t</span> ed25519</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Register for passwordless login (optional but recommended)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># If on Linux:</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ssh-copy-id <span class="ex">user@host</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># If on Windows, you&#39;ll need to do this manually:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> scp <span class="ex">%USERPROFILE%\.ssh\id_ed25519.pub</span> user@host:~</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ssh <span class="ex">user@host</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> umask <span class="ex">077</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> mkdir <span class="ex">-p</span> .ssh</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> read <span class="ex">line</span> <span class="op">&lt;</span> id_ed25519.pub</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> echo <span class="va">$line</span> <span class="op">&gt;&gt;</span> .ssh/authorized_keys</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> rm <span class="ex">id_ed25519.pub</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> exit</span></code></pre></div>
+    <h2 id="on-remote-remote-in-via-ssh">On Remote: Remote in via
+    SSH</h2>
+    <div class="sourceCode" id="cb3"><pre
+    class="sourceCode sh"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If using ssh directly:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ssh <span class="ex">user@host</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If using vscode:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> code <span class="ex">--remote</span> ssh-remote+user@host /home/user</span></code></pre></div>
+    <h2 id="on-linux-host-get-the-package">On Linux Host: Get the
+    Package</h2>
+    <div class="sourceCode" id="cb4"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If desired, use curl:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> mkdir <span class="ex">-p</span> ~/deploy-studio</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cd <span class="ex">~/deploy-studio</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> curl <span class="ex">-fsSL</span> https://github.com/vertigis/studio-base/archive/refs/tags/v1.1.677.241594-r15545747430.tar.gz <span class="kw">|</span> <span class="fu">tar</span> <span class="at">-xz</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># If desired, use git:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> git <span class="ex">clone</span> <span class="at">--depth</span> 1 <span class="at">--branch</span> v1.1.677.241594-r15545747430 https://github.com/vertigis/studio-base ~/deploy-studio</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cd <span class="ex">~/deploy-studio</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Install Docker and supporting tools if needed</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> sudo <span class="ex">./install-tools.sh</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> exec <span class="fu">sudo</span> su <span class="at">-</span> <span class="va">$USER</span></span></code></pre></div>
+    <h2 id="on-remote-activate-the-product">On Remote: Activate the
+    Product</h2>
+    <div class="sourceCode" id="cb5"><pre
+    class="sourceCode sh"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If session is local xterm, local vscode, or remote vscode:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ~/deploy-studio/activate.py</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># If session is remote through ssh:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ssh <span class="ex">-L</span> localhost:7780:localhost:7780 user@host ~/deploy-studio/activate.py</span></code></pre></div>
+    <h2 id="on-linux-host-initial-setup">On Linux Host: Initial
+    Setup</h2>
+    <div class="sourceCode" id="cb6"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Switch to the deployment folder</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cd <span class="ex">~/deploy-studio</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># If you need to discover your Enterprise Root certificates</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> ./extract-ca-certs.py</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit configuration for VertiGIS Studio</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># See checklist for what to edit.</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># If using a plain terminal, try one of these:</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> nano <span class="ex">docker-compose.yml</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> vi <span class="ex">docker-compose.yml</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># If using a GUI, try one of these:</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> code <span class="ex">docker-compose.yml</span> <span class="kw">&amp;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gedit <span class="ex">docker-compose.yml</span> <span class="kw">&amp;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> kate <span class="ex">docker-compose.yml</span> <span class="kw">&amp;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> mousepad <span class="ex">docker-compose.yml</span> <span class="kw">&amp;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Gain access to images</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gh <span class="ex">auth</span> login <span class="at">-w</span> <span class="at">-s</span> repo,read:packages</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gh <span class="ex">auth</span> token <span class="kw">|</span> <span class="ex">docker</span> login ghcr.io <span class="at">-u</span> x-access-token <span class="at">--password-stdin</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Pull/Start VertiGIS Studio</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="ex">compose</span> up <span class="at">--wait</span> <span class="at">--build</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Optionally, deploy the VertiGIS Studio Printing Engine</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="bu">exec</span> vs-studio-main-1 util-deploy-printing-engine</span></code></pre></div>
+    <h2 id="on-linux-host-updating">On Linux Host: Updating</h2>
+    <div class="sourceCode" id="cb7"><pre
+    class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Switch to the deployment folder</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> cd <span class="ex">~/deploy-studio</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># If login has expired, gain access to images</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gh <span class="ex">auth</span> login <span class="at">-w</span> <span class="at">-s</span> repo,read:packages</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> gh <span class="ex">auth</span> token <span class="kw">|</span> <span class="ex">docker</span> login ghcr.io <span class="at">-u</span> x-access-token <span class="at">--password-stdin</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Optionally, pull down VertiGIS Studio</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="ex">compose</span> pull</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, upgrade VertiGIS Studio</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="ex">compose</span> up <span class="at">--wait</span> <span class="at">--build</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Optionally, hot refresh configuration</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> docker <span class="bu">exec</span> vs-studio-main-1 util-refresh</span></code></pre></div>
+    <h2 id="check-list">Check List</h2>
+    <ul>
+    <li>Editing docker.compose.yml:
+    <ul>
+    <li>Set the front-end URL via <code>FRONTEND_URL</code></li>
+    <li>Set the VertiGIS Account ID via
+    <code>VERTIGIS_ACCOUNT_ID</code></li>
+    <li>Set the ArcGIS Portal URL via
+    <code>ARCGIS_PORTAL_URL</code></li>
+    <li>Set the ArcGIS App ID via <code>ARCGIS_APP_ID</code></li>
+    </ul></li>
+    </ul>
+</body>
+</html>
