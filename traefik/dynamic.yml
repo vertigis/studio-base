@@ -1,0 +1,52 @@
+http:
+  routers:
+    append-slash-router:
+      rule: >-
+        Path(`/studio`)
+      entryPoints:
+        - websecure
+      middlewares:
+        - append-slash
+      service: noop
+      tls:
+        certResolver: global
+
+    studio-router:
+      rule: >-
+        PathPrefix(`/studio/`)
+      entryPoints:
+        - websecure
+      middlewares:
+        - studio-rewrite-prefix
+      service: studio
+      tls:
+        certResolver: global
+
+  services:
+    studio:
+      loadBalancer:
+        servers:
+          - url: >-
+              http://studio.int:8080
+
+    noop:
+      loadBalancer:
+        servers:
+          - url: >-
+              http://localhost
+
+  middlewares:
+    append-slash:
+      redirectRegex:
+        regex: >-
+          ([^/]+)$
+        replacement: >-
+          ./$1/
+        permanent: true
+
+    studio-rewrite-prefix:
+      replacePathRegex:
+        regex: >-
+          ^/studio/(.*)
+        replacement: >-
+          /$1
