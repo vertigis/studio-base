@@ -1,0 +1,75 @@
+name: vs-studio
+services:
+  main:
+    # Change 'latest' to pin to a specific version
+    image: ghcr.io/vertigis/studio/base:v1.1.757.259513-r16665164773
+    restart: always
+    environment:
+      # Create an application in ArcGIS Portal
+      # TODO: Please modify appropriately
+      ARCGIS_APP_ID: app_id
+      # Portal URL
+      # TODO: Please modify appropriately
+      ARCGIS_PORTAL_URL: https://portal.contoso.com/portal
+      # VertiGIS Account ID
+      # TODO: Please modify appropriately
+      VERTIGIS_ACCOUNT_ID: account_id
+      # Frontend URL
+      # TODO: Please modify appropriately
+      FRONTEND_URL: https://server.contoso.com/studio
+      # This instance will purge old data
+      VERTIGIS_PURGE: 1
+      # This instance will handle 8 parallel jobs
+      VERTIGIS_WORKERS: 8
+    volumes:
+      - "data:/data"
+      - "logs:/var/log"
+      - "stmp:/stmp"
+    networks:
+      default: {}    
+      ingress: 
+        aliases:
+          - studio.int
+    # TODO: If you need to bring your own custom CA
+    # configs:
+    #  - source: custom_ca
+    #    target: /usr/local/share/ca-certificates/custom_ca.crt
+  ingress:
+    image: traefik
+    command:
+      - "--configFile=/etc/traefik/traefik.yml"
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - acme:/acme
+    configs:
+      - source: traefik_static
+        target: /etc/traefik/traefik.yml
+      - source: traefik_dynamic
+        target: /etc/traefik/dynamic.yml
+    networks:
+      - ingress
+
+configs:
+  custom_ca:
+    content: |
+      -----BEGIN CERTIFICATE-----
+      ... replace this with real cert ...
+      -----END CERTIFICATE-----
+  traefik_static:
+    file: ./traefik/traefik.yml
+  traefik_dynamic:
+    file: ./traefik/dynamic.yml
+
+networks:
+  default: {}
+  ingress:
+    name: ingress
+
+volumes:
+  acme: {}
+  data: {}
+  logs: {}
+  stmp: {}
