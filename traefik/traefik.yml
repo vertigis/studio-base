@@ -1,0 +1,28 @@
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
+providers:
+  file:
+    filename: /etc/traefik/dynamic.yml
+    watch: true
+
+certificatesResolvers:
+  global:
+    acme:
+      # If using global CA, change this section.
+      email: name@contoso.com
+      storage: /acme/acme.json
+      httpChallenge:
+        entryPoint: web
+
+  custom:
+    acme:
+      # If using custom CA, change this section.
+      email: name@contoso.com
+      storage: /acme/custom.json
+      caServer: https://your-custom-ca.example.com/acme/acme/directory
+      httpChallenge:
+        entryPoint: web
