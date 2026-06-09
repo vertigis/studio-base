@@ -179,12 +179,12 @@ jobs:
             --manifest-json manifest.json \
             --versions-json versions.json \
             --output docs/index.md
-      - name: Pin README examples to image tag
+      - name: Pin README image tags
         env:
           IMAGE_TAG: ${{ matrix.image_tag }}
         run: |
           set -euo pipefail
-          python -c "from pathlib import Path; path = Path('README.md'); content = path.read_text(encoding='utf-8'); content = content.replace('https://vertigis.github.io/studio-base/', 'https://vertigis.github.io/studio-base/?tag=${IMAGE_TAG}'); content = content.replace('<tag>', '${IMAGE_TAG}'); path.write_text(content, encoding='utf-8')"
+          python -c "from pathlib import Path; path = Path('README.md'); content = path.read_text(encoding='utf-8'); content = content.replace('<tag>', '${IMAGE_TAG}'); path.write_text(content, encoding='utf-8')"
       - name: Create git tag
         env:
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
