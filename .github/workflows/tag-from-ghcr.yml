@@ -199,7 +199,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git checkout --detach "origin/${DEFAULT_BRANCH}"
-          git add README.md index.html
+          git add README.md _navbar.md
           git add -f docs/index.md
           git commit -m "Capture Studio Base snapshot for ${IMAGE_TAG}"
 
@@ -249,6 +249,7 @@ jobs:
           rm -rf site
           mkdir -p site/docs
           cp index.html site/index.html
+          cp _navbar.md site/_navbar.md
           cp README.md site/README.md
           cp docs/index.md site/docs/index.md
           touch site/.nojekyll

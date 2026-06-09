@@ -1,9 +1,33 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <link rel="icon" href="https://apps.vertigisstudio.com/favicon.ico" />
+  <meta charset="utf-8">
+  <link rel="icon" href="https://apps.vertigisstudio.com/favicon.ico">
   <title>VertiGIS Studio Base</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07131f">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/dark.css">
+  <link rel="stylesheet" href="https://vertigis.github.io/markdown-docs-reader/styles.css">
 </head>
-<body>Pending</body>
+<body>
+    <div id="app"></div>
+
+    <script>
+        function __init() {
+            const args = new URL(location.href).searchParams;
+            const tag = args.get("tag") || "gh-pages";
+            window.$docsify = {
+                alias: {
+                    "/home/(.*)": `https://raw.githubusercontent.com/vertigis/studio-base/${tag}/$1`,
+                    "/kit/(.*)": "https://raw.githubusercontent.com/vertigis/host-kit/master/$1"
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-docker.min.js"></script>
+    <script src="https://vertigis.github.io/markdown-docs-reader/plugin.js"></script>
+</body>
 </html>

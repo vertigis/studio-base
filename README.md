@@ -1,6 +1,8 @@
-# VertiGIS Studio Base
+# ![](https://apps.vertigisstudio.com/favicon.ico) VertiGIS Studio Base
 
 Container image for running VertiGIS Studio Base with Docker.
+
+See [docs](https://vertigis.github.io/studio-base/).
 
 ## Image
 
