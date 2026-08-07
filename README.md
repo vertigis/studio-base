@@ -7,7 +7,7 @@ See [docs](https://vertigis.github.io/studio-base/).
 ## Image
 
 ```text
-ghcr.io/vertigis/studio/base:<tag>
+ghcr.io/vertigis/studio/base:v1.1.1030.330038-r25200186693
 ```
 
 ## Registry login
@@ -29,7 +29,7 @@ docker run -d --name studio-base \
   -v studio-data:/data \
   -v studio-logs:/var/log \
   -v studio-temp:/stmp \
-  ghcr.io/vertigis/studio/base:<tag>
+  ghcr.io/vertigis/studio/base:v1.1.1030.330038-r25200186693
 ```
 
 ## Compose example
@@ -37,7 +37,7 @@ docker run -d --name studio-base \
 ```yaml
 services:
   studio-base:
-    image: ghcr.io/vertigis/studio/base:<tag>
+    image: ghcr.io/vertigis/studio/base:v1.1.1030.330038-r25200186693
     restart: unless-stopped
     ports:
       # Expose Studio Base on the host.
