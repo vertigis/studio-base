@@ -110,7 +110,7 @@ def main() -> None:
         lines.extend(
             [
                 "",
-                f"### {prefix.title()} `{principal_version}`",
+                f"## {prefix.title()} `{principal_version}`",
                 "",
                 "| Component | Version |",
                 "| --- | --- |",
